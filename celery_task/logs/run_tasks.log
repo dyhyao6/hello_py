@@ -1,0 +1,48 @@
+[2025-11-27 14:22:57,200] INFO [MainProcess:celery.worker.consumer.connection:22] Connected to redis://localhost:6379/0
+[2025-11-27 14:22:57,203] INFO [MainProcess:celery.worker.consumer.mingle:40] mingle: searching for neighbors
+[2025-11-27 14:22:58,215] INFO [MainProcess:celery.worker.consumer.mingle:49] mingle: all alone
+[2025-11-27 14:22:58,239] INFO [MainProcess:celery.apps.worker:176] celery@duyonghuideMacBook-Pro.local ready.
+[2025-11-27 14:23:11,321] INFO [MainProcess:celery.worker.strategy:161] Task celery_task.tasks.add[c9986d6c-3101-4428-9a76-21e20e54542b] received
+[2025-11-27 14:23:11,322] INFO [MainProcess:celery.worker.strategy:161] Task celery_task.tasks.risky_task[37b9668d-c5a5-4477-85c3-2db02c1a11fd] received
+[2025-11-27 14:23:11,329] INFO [ForkPoolWorker-8:celery.app.trace:128] Task celery_task.tasks.add[c9986d6c-3101-4428-9a76-21e20e54542b] succeeded in 0.007474333000573097s: 10
+[2025-11-27 14:23:11,335] INFO [MainProcess:celery.worker.strategy:161] Task celery_task.tasks.risky_task[37b9668d-c5a5-4477-85c3-2db02c1a11fd] received
+[2025-11-27 14:23:11,336] INFO [ForkPoolWorker-1:celery.app.trace:128] Task celery_task.tasks.risky_task[37b9668d-c5a5-4477-85c3-2db02c1a11fd] retry: Retry in 2s
+[2025-11-27 14:23:13,337] INFO [ForkPoolWorker-8:celery.app.trace:128] Task celery_task.tasks.risky_task[37b9668d-c5a5-4477-85c3-2db02c1a11fd] succeeded in 0.005429832999652717s: 'Success'
+[2025-11-27 14:28:15,047] INFO [MainProcess:celery_task:6] Sending tasks to Celery worker...
+[2025-11-27 14:28:15,104] INFO [MainProcess:celery_task:10] Sent add task: fa0df804-4f57-45b2-957b-9b488776f84a
+[2025-11-27 14:28:15,104] INFO [MainProcess:celery_task:14] Sent heavy_work task: 1fb1c869-e6f4-4f77-b697-3473751fd98d
+[2025-11-27 14:28:15,105] INFO [MainProcess:celery_task:18] Sent risky_task: 710ba2c8-9629-41ac-a16a-12d286d45c11
+[2025-11-27 14:28:15,105] INFO [MainProcess:celery_task:20] Waiting for results (blocking for demo purposes)...
+[2025-11-27 14:28:15,108] INFO [MainProcess:celery_task:25] Add Result: 10
+[2025-11-27 14:28:18,120] INFO [MainProcess:celery_task:31] Heavy Work Result: Slept for 3s
+[2025-11-27 14:28:18,120] INFO [MainProcess:celery_task:37] Risky Task Result: Success
+[2025-11-27 14:29:34,602] INFO [MainProcess:celery.worker.consumer.connection:22] Connected to redis://localhost:6379/0
+[2025-11-27 14:29:34,605] INFO [MainProcess:celery.worker.consumer.mingle:40] mingle: searching for neighbors
+[2025-11-27 14:29:35,616] INFO [MainProcess:celery.worker.consumer.mingle:49] mingle: all alone
+[2025-11-27 14:29:35,638] INFO [MainProcess:celery.apps.worker:176] celery@duyonghuideMacBook-Pro.local ready.
+[2025-11-27 14:29:45,375] INFO [MainProcess:celery_task:6] Sending tasks to Celery worker...
+[2025-11-27 14:29:45,432] INFO [MainProcess:celery_task:10] Sent add task: b097a3d3-8f4f-48f0-b32d-53731cc72d1f
+[2025-11-27 14:29:45,433] INFO [MainProcess:celery_task:14] Sent heavy_work task: 3e046a62-e8df-40b7-b5e3-6d69e1dab60a
+[2025-11-27 14:29:45,434] INFO [MainProcess:celery_task:18] Sent risky_task: 445a7b12-2f3d-407d-86e2-cad344b3fa32
+[2025-11-27 14:29:45,434] INFO [MainProcess:celery_task:20] Waiting for results (blocking for demo purposes)...
+[2025-11-27 14:29:45,434] INFO [MainProcess:celery.worker.strategy:161] Task celery_task.tasks.heavy_work[3e046a62-e8df-40b7-b5e3-6d69e1dab60a] received
+[2025-11-27 14:29:45,435] INFO [MainProcess:celery_task:25] Add Result: 10
+[2025-11-27 14:29:45,443] INFO [MainProcess:celery.worker.strategy:161] Task celery_task.tasks.risky_task[445a7b12-2f3d-407d-86e2-cad344b3fa32] received
+[2025-11-27 14:29:47,467] INFO [MainProcess:celery.worker.strategy:161] Task celery_task.tasks.risky_task[445a7b12-2f3d-407d-86e2-cad344b3fa32] received
+[2025-11-27 14:29:47,468] INFO [ForkPoolWorker-1:celery.app.trace:128] Task celery_task.tasks.risky_task[445a7b12-2f3d-407d-86e2-cad344b3fa32] retry: Retry in 2s
+[2025-11-27 14:29:48,446] INFO [MainProcess:celery_task:31] Heavy Work Result: Slept for 3s
+[2025-11-27 14:29:48,446] INFO [ForkPoolWorker-8:celery.app.trace:128] Task celery_task.tasks.heavy_work[3e046a62-e8df-40b7-b5e3-6d69e1dab60a] succeeded in 3.011325833000228s: 'Slept for 3s'
+[2025-11-27 14:29:49,477] INFO [MainProcess:celery.worker.strategy:161] Task celery_task.tasks.risky_task[445a7b12-2f3d-407d-86e2-cad344b3fa32] received
+[2025-11-27 14:29:49,478] INFO [ForkPoolWorker-8:celery.app.trace:128] Task celery_task.tasks.risky_task[445a7b12-2f3d-407d-86e2-cad344b3fa32] retry: Retry in 2s
+[2025-11-27 14:29:51,476] ERROR [MainProcess:celery_task:39] Risky Task Error: Can't retry celery_task.tasks.risky_task[445a7b12-2f3d-407d-86e2-cad344b3fa32] args:() kwargs:{}
+[2025-11-27 14:29:51,476] ERROR [ForkPoolWorker-8:celery.app.trace:267] Task celery_task.tasks.risky_task[445a7b12-2f3d-407d-86e2-cad344b3fa32] raised unexpected: MaxRetriesExceededError("Can't retry celery_task.tasks.risky_task[445a7b12-2f3d-407d-86e2-cad344b3fa32] args:() kwargs:{}")
+Traceback (most recent call last):
+  File "/Users/duyonghui/opt/miniconda3/envs/py310/lib/python3.10/site-packages/celery/app/trace.py", line 453, in trace_task
+    R = retval = fun(*args, **kwargs)
+  File "/Users/duyonghui/opt/miniconda3/envs/py310/lib/python3.10/site-packages/celery/app/trace.py", line 736, in __protected_call__
+    return self.run(*args, **kwargs)
+  File "/Users/duyonghui/pycharm_workpsace/hello_py/celery_task/tasks.py", line 54, in risky_task
+    raise self.retry(countdown=2, max_retries=3)
+  File "/Users/duyonghui/opt/miniconda3/envs/py310/lib/python3.10/site-packages/celery/app/task.py", line 744, in retry
+    raise self.MaxRetriesExceededError(
+celery.exceptions.MaxRetriesExceededError: Can't retry celery_task.tasks.risky_task[445a7b12-2f3d-407d-86e2-cad344b3fa32] args:() kwargs:{}

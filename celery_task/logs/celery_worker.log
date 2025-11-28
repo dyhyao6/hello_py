@@ -1,0 +1,62 @@
+ 
+ -------------- celery@duyonghuideMacBook-Pro.local v5.5.3 (immunity)
+--- ***** ----- 
+-- ******* ---- macOS-26.1-arm64-arm-64bit 2025-11-27 14:22:57
+- *** --- * --- 
+- ** ---------- [config]
+- ** ---------- .> app:         celery_app:0x1012bd570
+- ** ---------- .> transport:   redis://localhost:6379/0
+- ** ---------- .> results:     redis://localhost:6379/1
+- *** --- * --- .> concurrency: 10 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . celery_task.tasks.add
+  . celery_task.tasks.heavy_work
+  . celery_task.tasks.multiply
+  . celery_task.tasks.risky_task
+
+[2025-11-27 14:23:11,327] INFO [ForkPoolWorker-8:celery_task.tasks.add:c9986d6c-3101-4428-9a76-21e20e54542b] Task add started with args: x=4, y=6
+[2025-11-27 14:23:11,328] INFO [ForkPoolWorker-8:celery_task.tasks.add:c9986d6c-3101-4428-9a76-21e20e54542b] Task add finished. Result: 10
+[2025-11-27 14:23:11,328] INFO [ForkPoolWorker-1:celery_task.tasks.risky_task:37b9668d-c5a5-4477-85c3-2db02c1a11fd] Starting risky task...
+[2025-11-27 14:23:11,328] ERROR [ForkPoolWorker-1:celery_task.tasks.risky_task:37b9668d-c5a5-4477-85c3-2db02c1a11fd] Risky task failed! Retrying...
+[2025-11-27 14:23:13,334] INFO [ForkPoolWorker-8:celery_task.tasks.risky_task:37b9668d-c5a5-4477-85c3-2db02c1a11fd] Starting risky task...
+[2025-11-27 14:23:13,334] INFO [ForkPoolWorker-8:celery_task.tasks.risky_task:37b9668d-c5a5-4477-85c3-2db02c1a11fd] Risky task succeeded!
+
+worker: Warm shutdown (MainProcess)
+ 
+ -------------- celery@duyonghuideMacBook-Pro.local v5.5.3 (immunity)
+--- ***** ----- 
+-- ******* ---- macOS-26.1-arm64-arm-64bit 2025-11-27 14:29:34
+- *** --- * --- 
+- ** ---------- [config]
+- ** ---------- .> app:         celery_app:0x104395270
+- ** ---------- .> transport:   redis://localhost:6379/0
+- ** ---------- .> results:     redis://localhost:6379/1
+- *** --- * --- .> concurrency: 10 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . celery_task.tasks.add
+  . celery_task.tasks.heavy_work
+  . celery_task.tasks.multiply
+  . celery_task.tasks.risky_task
+
+[2025-11-27 14:29:45,440] INFO [ForkPoolWorker-8:celery_task.tasks.heavy_work:3e046a62-e8df-40b7-b5e3-6d69e1dab60a] Starting heavy work for 3 seconds...
+[2025-11-27 14:29:47,453] INFO [ForkPoolWorker-1:celery_task.tasks.risky_task:445a7b12-2f3d-407d-86e2-cad344b3fa32] Starting risky task...
+[2025-11-27 14:29:47,454] ERROR [ForkPoolWorker-1:celery_task.tasks.risky_task:445a7b12-2f3d-407d-86e2-cad344b3fa32] Risky task failed! Retrying...
+[2025-11-27 14:29:48,442] INFO [ForkPoolWorker-8:celery_task.tasks.heavy_work:3e046a62-e8df-40b7-b5e3-6d69e1dab60a] Heavy work completed.
+[2025-11-27 14:29:49,462] INFO [ForkPoolWorker-8:celery_task.tasks.risky_task:445a7b12-2f3d-407d-86e2-cad344b3fa32] Starting risky task...
+[2025-11-27 14:29:49,463] ERROR [ForkPoolWorker-8:celery_task.tasks.risky_task:445a7b12-2f3d-407d-86e2-cad344b3fa32] Risky task failed! Retrying...
+[2025-11-27 14:29:51,471] INFO [ForkPoolWorker-8:celery_task.tasks.risky_task:445a7b12-2f3d-407d-86e2-cad344b3fa32] Starting risky task...
+[2025-11-27 14:29:51,472] ERROR [ForkPoolWorker-8:celery_task.tasks.risky_task:445a7b12-2f3d-407d-86e2-cad344b3fa32] Risky task failed! Retrying...
+
+worker: Warm shutdown (MainProcess)
