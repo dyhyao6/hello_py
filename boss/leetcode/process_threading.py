@@ -84,8 +84,7 @@ def add():
 
 def run_add_safe():
     """
-    线程安全版本
-    不安全：
+    线程不安全版本：
     import threading
 
     counter = 0
