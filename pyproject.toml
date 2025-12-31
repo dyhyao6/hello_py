@@ -8,31 +8,27 @@ dependencies = [
     # Web Framework
     "fastapi>=0.104.0",
     "uvicorn[standard]>=0.24.0",
-    
     # Database
     "sqlalchemy>=2.0.0",
     "pymysql>=1.1.0",
     "psycopg2-binary>=2.9.0",
-    
     # Data Validation & Serialization
     "pydantic>=2.0.0",
-    
     # Environment Configuration
     "python-dotenv>=1.0.0",
-    
     # Logging
     "loguru>=0.7.0",
-    
     # Kafka
     "confluent-kafka>=2.3.0",
-    
     # Celery & Task Queue
     "celery>=5.3.0",
     "redis>=5.0.0",
     "flower>=2.0.0",
-    
     # Utilities
-    "python-multipart>=0.0.6",  # For FastAPI file uploads
+    "python-multipart>=0.0.6", # For FastAPI file uploads
+    "langgraph-cli[inmem]>=0.4.3",
+    "langgraph>=0.6.11",
+    "langchain>=0.3.27",
 ]
 
 [project.optional-dependencies]

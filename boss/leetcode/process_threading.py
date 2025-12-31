@@ -105,4 +105,3 @@ def run_add_safe():
     for t in threads: t.start()
     for t in threads: t.join()
     print(counter)  # 200000，结果正确
-
