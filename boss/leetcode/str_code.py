@@ -168,4 +168,4 @@ if __name__ == '__main__':
 
     print(s.convert("PAYPALISHIRING", 3))  # PAHNAPLSIIGYIR
 
-    print(s.isValid("()[]{}"))  # True
+    print(s.isValid("()[]{}"))
