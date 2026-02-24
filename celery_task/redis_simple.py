@@ -5,7 +5,7 @@ Redis服务快速测试脚本
 import redis
 
 
-def test_redis_connection(host='127.0.0.1', port=6379, db=0):
+def redis_connection(host='127.0.0.1', port=6379, db=0):
     """快速测试Redis连接"""
     try:
         # 创建Redis连接
@@ -65,7 +65,7 @@ def main():
     # print("-" * 40)
 
     # 测试默认配置
-    success = test_redis_connection()
+    success = redis_connection()
 
     # print("-" * 40)
     if success:
