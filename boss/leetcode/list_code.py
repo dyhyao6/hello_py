@@ -250,7 +250,6 @@ class Solution:
         return slow
 
 
-
 if __name__ == "__main__":
     height = [8, 7, 2, 1]
     # are = Solution().maxArea(height=height)
