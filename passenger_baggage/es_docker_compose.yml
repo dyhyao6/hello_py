@@ -1,0 +1,56 @@
+version: '3'
+services:
+  es01:
+    image: arm64.harbor.shai.ai/infra/elasticsearch:8.10.2
+    container_name: es01
+    environment:
+      - node.name=es01
+      - cluster.name=es-cluster
+      - discovery.seed_hosts=es02
+      - cluster.initial_master_nodes=es01,es02
+      - bootstrap.memory_lock=true
+      - ES_JAVA_OPTS=-Xms8g -Xmx8g
+      - xpack.security.enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - /data/es/node1/data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - esnet
+
+  es02:
+    image: arm64.harbor.shai.ai/infra/elasticsearch:8.10.2
+    container_name: es02
+    environment:
+      - node.name=es02
+      - cluster.name=es-cluster
+      - discovery.seed_hosts=es01
+      - cluster.initial_master_nodes=es01,es02
+      - bootstrap.memory_lock=true
+      - ES_JAVA_OPTS=-Xms8g -Xmx8g
+      - xpack.security.enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - /data/es/node2/data:/usr/share/elasticsearch/data
+    ports:
+      - 9201:9200
+    networks:
+      - esnet
+  kibana:
+    image: arm64.harbor.shai.ai/infra/kibana:8.10.2
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://es01:9200
+    ports:
+      - 5601:5601
+    networks:
+      - esnet
+networks:
+  esnet:
