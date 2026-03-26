@@ -1,0 +1,109 @@
+{
+  "_index": "event-2026.01",
+  "_type": "_doc",
+  "_id": "EbMFJJ0B0vv1ViDzI4Pt",
+  "_version": 1,
+  "_score": 1,
+  "_source": {
+    "session_id": "6691b3a6-0ec6-11f0-9ea6-5a106493dc60",
+    "loc_name": "location",
+    "lat": 0,
+    "lon": 0,
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "type": "passenger_baggage",
+    "message": "xray_ocr_result",
+    "frame": "2026/03/25/7cbeb2e4-6abc-48f2-a820-8d3d5e162c03_f_event_unknown.jpg",
+    "video": "-199",
+    "time": "2026-03-25T16:03:29.503508+08:00",
+    "extra": "{\"package\": [\"#047\"], \"bag_id\": 6919923, \"bag_time\": \"2026-03-25T07:47:53+00:00\"}",
+    "camera_id": "unknown",
+    "camera_name": "unknown",
+    "created_at": "2026-03-25T16:03:29.900601+08:00",
+    "id": "6691b3a6-0ec6-11f0-9ea6-5a106493dc60_9b7dabb0-4c9c-401b-8584-18772e577214"
+  },
+  "fields": {
+    "frame.keyword": [
+      "2026/03/25/7cbeb2e4-6abc-48f2-a820-8d3d5e162c03_f_event_unknown.jpg"
+    ],
+    "created_at": [
+      "2026-03-25T08:03:29.900Z"
+    ],
+    "lon": [
+      0
+    ],
+    "video": [
+      "-199"
+    ],
+    "type": [
+      "passenger_baggage"
+    ],
+    "id.keyword": [
+      "6691b3a6-0ec6-11f0-9ea6-5a106493dc60_9b7dabb0-4c9c-401b-8584-18772e577214"
+    ],
+    "type.keyword": [
+      "passenger_baggage"
+    ],
+    "extra": [
+      "{\"package\": [\"#047\"], \"bag_id\": 6919923, \"bag_time\": \"2026-03-25T07:47:53+00:00\"}"
+    ],
+    "loc_name.keyword": [
+      "location"
+    ],
+    "loc_name": [
+      "location"
+    ],
+    "id": [
+      "6691b3a6-0ec6-11f0-9ea6-5a106493dc60_9b7dabb0-4c9c-401b-8584-18772e577214"
+    ],
+    "camera_name": [
+      "unknown"
+    ],
+    "lat": [
+      0
+    ],
+    "video.keyword": [
+      "-199"
+    ],
+    "camera_id.keyword": [
+      "unknown"
+    ],
+    "camera_id": [
+      "unknown"
+    ],
+    "session_id": [
+      "6691b3a6-0ec6-11f0-9ea6-5a106493dc60"
+    ],
+    "message": [
+      "xray_ocr_result"
+    ],
+    "extra.keyword": [
+      "{\"package\": [\"#047\"], \"bag_id\": 6919923, \"bag_time\": \"2026-03-25T07:47:53+00:00\"}"
+    ],
+    "camera_name.keyword": [
+      "unknown"
+    ],
+    "message.keyword": [
+      "xray_ocr_result"
+    ],
+    "x": [
+      0
+    ],
+    "y": [
+      0
+    ],
+    "session_id.keyword": [
+      "6691b3a6-0ec6-11f0-9ea6-5a106493dc60"
+    ],
+    "z": [
+      0
+    ],
+    "time": [
+      "2026-03-25T08:03:29.503Z"
+    ],
+    "frame": [
+      "2026/03/25/7cbeb2e4-6abc-48f2-a820-8d3d5e162c03_f_event_unknown.jpg"
+    ]
+  }
+}

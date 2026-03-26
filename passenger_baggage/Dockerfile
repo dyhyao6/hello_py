@@ -10,6 +10,7 @@ RUN mkdir -p /app/state
 
 COPY passenger_baggage_producer.py .
 COPY face_vector_producer.py .
+COPY xray_ocr_producer.py .
 COPY manager.py .
 COPY requirements.txt .
 

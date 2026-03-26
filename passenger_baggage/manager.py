@@ -34,6 +34,13 @@ class ProducerManager:
                 "state_file": "state/face_vector_state.json",
                 "container_name": "face-vector-producer",
                 "image_name": "face-vector-producer"
+            },
+            "xray_ocr": {
+                "name": "X-ray OCR Producer",
+                "script": "xray_ocr_producer.py",
+                "state_file": "state/xray_ocr_state.json",
+                "container_name": "xray-ocr-producer",
+                "image_name": "xray-ocr-producer"
             }
         }
         self.processes = {}
@@ -176,6 +183,7 @@ def print_usage():
     logger.info("\nAvailable producers:")
     logger.info("  passenger_baggage   - Passenger Baggage Producer")
     logger.info("  face_vector        - Face Vector Producer")
+    logger.info("  xray_ocr          - X-ray OCR Producer")
     logger.info("\nExamples:")
     logger.info("  python manager.py start passenger_baggage")
     logger.info("  python manager.py stop all")

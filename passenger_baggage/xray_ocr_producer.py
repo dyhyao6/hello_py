@@ -22,12 +22,12 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-class PassengerBaggageProducer:
-    def __init__(self, state_file="state/passenger_baggage_state.json"):
+class XrayOcrProducer:
+    def __init__(self, state_file="state/xray_ocr_state.json"):
         self.state_file = state_file
         self.es = self.get_es_client()
         self.kafka_producer = self.get_kafka_producer()
-        self.kafka_topic = os.getenv("KAFKA_TOPIC_PASSENGER_BAGGAGE", "passenger_baggage")
+        self.kafka_topic = os.getenv("KAFKA_TOPIC_XRAY_OCR", "xray_ocr_result")
         self.last_timestamp = None
         self.running = True
         self.load_state()
@@ -35,30 +35,29 @@ class PassengerBaggageProducer:
         signal.signal(signal.SIGTERM, self.handle_signal)
         
     def get_es_client(self):
-        es_host = os.getenv("ES_HOST_BAGGAGE", "http://10.143.32.11:9200")
-        es_username = os.getenv("ES_USERNAME_BAGGAGE", "")
-        es_password = os.getenv("ES_PASSWORD_BAGGAGE", "")
-        
-        if es_password:
+        es_host = os.getenv("ES_HOST", "https://10.143.36.7:30424")
+        es_username = os.getenv("ES_USERNAME", "read_user")
+        es_password = os.getenv("ES_PASSWORD", "FFRoqyWjujzrN3vgfWBM")
+
+        logger.info(f"Connecting to Elasticsearch at {es_host}")
+        logger.info(f"Username: {es_username}")
+        logger.info(f"Password: {es_password}")
+
+        try:
             es = Elasticsearch(
-                [es_host],
-                basic_auth=(es_username, es_password),
+                hosts=[es_host],
+                http_auth=(es_username, es_password),
                 verify_certs=False,
                 ssl_show_warn=False,
                 request_timeout=60,
                 max_retries=3,
                 retry_on_timeout=True
             )
-        else:
-            es = Elasticsearch(
-                [es_host],
-                verify_certs=False,
-                ssl_show_warn=False,
-                request_timeout=60,
-                max_retries=3,
-                retry_on_timeout=True
-            )
-        return es
+
+            return es
+        except Exception as e:
+            logger.error(f"Failed to create Elasticsearch client: {e}")
+            raise
     
     def get_kafka_producer(self):
         kafka_broker = os.getenv("KAFKA_BROKER", "10.143.41.12:9092")
@@ -94,31 +93,16 @@ class PassengerBaggageProducer:
         self.save_state()
         sys.exit(0)
     
-    def flatten_and_convert_to_snake_case(self, data):
-        if isinstance(data, dict):
-            items = {}
-            for key, value in data.items():
-                new_key = key.replace('@', '').replace('ID', '_id').replace('UUID', '_uuid')
-                new_key = ''.join(['_' + c.lower() if c.isupper() else c for c in new_key]).lstrip('_')
-                
-                if isinstance(value, dict):
-                    items.update(self.flatten_and_convert_to_snake_case(value))
-                elif isinstance(value, list):
-                    items[new_key] = value
-                else:
-                    if new_key not in items:
-                        items[new_key] = value
-            return items
-        elif isinstance(data, list):
-            return data
-        else:
-            return data
-    
     def get_new_data(self):
         query = {
             "query": {
                 "bool": {
                     "must": [
+                        {
+                            "term": {
+                                "message.keyword": "xray_ocr_result"
+                            }
+                        },
                         {
                             "range": {
                                 "time": {
@@ -149,7 +133,7 @@ class PassengerBaggageProducer:
             })
         
         try:
-            response = self.es.search(index="passenger_baggage_event*", body=query)
+            response = self.es.search(index="event*", body=query)
             hits = response.get("hits", {}).get("hits", [])
             
             new_data = []
@@ -162,52 +146,19 @@ class PassengerBaggageProducer:
                 except (json.JSONDecodeError, TypeError):
                     extra_data = {}
                 
-                base_fields = {
-                    "camera_id": source.get("camera_id", ""),
-                    "camera_name": source.get("camera_name", ""),
-                    "frame": "http://10.143.32.202/edi-data/" + source.get("frame", ""),
-                    "created_at": source.get("created_at", ""),
+                record = {
+                    "frame": source.get("frame", ""),
                     "time": source.get("time", ""),
-                    "frame_timestamp": extra_data.get("frame_timestamp", ""),
-                    "timestamp": extra_data.get("frame", {}).get("timestamp", ""),
-                    "package": extra_data.get("package", [])
+                    "package": extra_data.get("package", []),
+                    "bag_id": extra_data.get("bag_id", ""),
+                    "bag_time": extra_data.get("bag_time", "")
                 }
                 
-                passengers = extra_data.get("frame", {}).get("passengers", [])
-                if passengers:
-                    for passenger in passengers:
-                        record = base_fields.copy()
-                        passenger_id = passenger.get("id", "")
-                        confidence = passenger.get("confidence", 0.0)
-                        face = passenger.get("face") or {}
-                        face_bbox = face.get("bbox", [])
-                        feature = face.get("feature", [])
-                        
-                        record["id"] = passenger_id
-                        record["confidence"] = confidence
-                        record["face_bbox"] = face_bbox
-                        record["feature"] = feature
-                        
-                        new_data.append(record)
-                else:
-                    record = base_fields.copy()
-                    record["id"] = ""
-                    record["confidence"] = 0.0
-                    record["face_bbox"] = []
-                    record["feature"] = []
-                    new_data.append(record)
+                new_data.append(record)
                 
-                time_str = base_fields.get("time", "")
-                if time_str and isinstance(time_str, str):
-                    try:
-                        time_value = datetime.fromisoformat(time_str)
-                    except ValueError:
-                        time_value = None
-                else:
-                    time_value = None
-                
-                if time_value:
-                    self.last_timestamp = time_value.isoformat()
+                time_str = source.get("time", "")
+                if time_str:
+                    self.last_timestamp = time_str
             
             return new_data
         
@@ -236,8 +187,9 @@ class PassengerBaggageProducer:
         self.save_state()
     
     def run(self, interval=5):
-        logger.info("Starting Passenger Baggage Producer...")
+        logger.info("Starting X-ray OCR Producer...")
         logger.info(f"Fetching data from Elasticsearch and sending to Kafka topic: {self.kafka_topic}")
+        logger.info(f"Filter: message.keyword = 'xray_ocr_result'")
         logger.info(f"Polling interval: {interval} seconds")
         logger.info("Press Ctrl+C to stop\n")
         
@@ -264,5 +216,5 @@ class PassengerBaggageProducer:
 
 
 if __name__ == "__main__":
-    producer = PassengerBaggageProducer()
+    producer = XrayOcrProducer()
     producer.run()

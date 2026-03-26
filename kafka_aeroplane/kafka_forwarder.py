@@ -13,7 +13,8 @@ TARGET_BROKER = "172.16.11.15:9092"
 TOPICS = [
     "airport_algorithm",
     "saa-recognized-face-vector",
-    "passenger_baggage"
+    "passenger_baggage",
+    "xray_ocr_result"
 ]
 
 GROUP_ID_PREFIX = "kafka_forwarder_v3"
