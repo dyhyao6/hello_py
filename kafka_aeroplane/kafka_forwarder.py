@@ -14,6 +14,8 @@ TOPICS = [
     "airport_algorithm",
     "saa-recognized-face-vector",
     "passenger_baggage",
+    "passenger_trays",
+    "passenger_tags",
     "xray_ocr_result"
 ]
 

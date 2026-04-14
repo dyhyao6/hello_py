@@ -147,7 +147,7 @@ class XrayOcrProducer:
                     extra_data = {}
                 
                 record = {
-                    "frame": source.get("frame", ""),
+                    "frame": "http://10.143.32.202/edi-data/" + source.get("frame", ""),
                     "time": source.get("time", ""),
                     "package": extra_data.get("package", []),
                     "bag_id": extra_data.get("bag_id", ""),

@@ -181,7 +181,7 @@ def print_usage():
     logger.info("  status              - Show status of all producers")
     logger.info("  list                - List all available producers")
     logger.info("\nAvailable producers:")
-    logger.info("  passenger_baggage   - Passenger Baggage Producer")
+    logger.info("  passenger_baggage   - Passenger Baggage Producer (includes trays)")
     logger.info("  face_vector        - Face Vector Producer")
     logger.info("  xray_ocr          - X-ray OCR Producer")
     logger.info("\nExamples:")

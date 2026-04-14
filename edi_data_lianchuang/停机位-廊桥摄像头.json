@@ -1,0 +1,212 @@
+[
+  {
+    "category": "224",
+    "cameraId": "551932053507",
+    "name": "1424(新)",
+    "online": true
+  },
+  {
+    "category": "224",
+    "cameraId": "551932025633",
+    "name": "4024(新)",
+    "online": false
+  },
+  {
+    "category": "225",
+    "cameraId": "551932025634",
+    "name": "4025(新)",
+    "online": true
+  },
+  {
+    "category": "225",
+    "cameraId": "551932053508",
+    "name": "1425(新)",
+    "online": false
+  },
+  {
+    "category": "227",
+    "cameraId": "551932025636",
+    "name": "4027(新)",
+    "online": true
+  },
+  {
+    "category": "227",
+    "cameraId": "551932053510",
+    "name": "1427(新)",
+    "online": true
+  },
+  {
+    "category": "228",
+    "cameraId": "551932025637",
+    "name": "4028(新)",
+    "online": true
+  },
+  {
+    "category": "228",
+    "cameraId": "551932053511",
+    "name": "1428(新)",
+    "online": true
+  },
+  {
+    "category": "231",
+    "cameraId": "551932025703",
+    "name": "4031(新)",
+    "online": true
+  },
+  {
+    "category": "231",
+    "cameraId": "551932053535",
+    "name": "1431(新)",
+    "online": true
+  },
+  {
+    "category": "232",
+    "cameraId": "551932025704",
+    "name": "4032(新)",
+    "online": true
+  },
+  {
+    "category": "232",
+    "cameraId": "551932053599",
+    "name": "1432(新)",
+    "online": true
+  },
+  {
+    "category": "234",
+    "cameraId": "551932025727",
+    "name": "4034(新)",
+    "online": true
+  },
+  {
+    "category": "234",
+    "cameraId": "551932053601",
+    "name": "1434(新)",
+    "online": true
+  },
+  {
+    "category": "256",
+    "cameraId": "551932142726",
+    "name": "4056(新)",
+    "online": true
+  },
+  {
+    "category": "256",
+    "cameraId": "551932084322",
+    "name": "4156(新)",
+    "online": true
+  },
+  {
+    "category": "256",
+    "cameraId": "551932085060",
+    "name": "1456(新)",
+    "online": true
+  },
+  {
+    "category": "261",
+    "cameraId": "551932052668",
+    "name": "4061(新)",
+    "online": true
+  },
+  {
+    "category": "261",
+    "cameraId": "551932054374",
+    "name": "1461(新)",
+    "online": true
+  },
+  {
+    "category": "262",
+    "cameraId": "551932054438",
+    "name": "1462(新)",
+    "online": true
+  },
+  {
+    "category": "262",
+    "cameraId": "551932052669",
+    "name": "4062(新)",
+    "online": true
+  },
+  {
+    "category": "263",
+    "cameraId": "551932054439",
+    "name": "1463(新)",
+    "online": true
+  },
+  {
+    "category": "263",
+    "cameraId": "551932052670",
+    "name": "4063(新)",
+    "online": true
+  },
+  {
+    "category": "265",
+    "cameraId": "551932054441",
+    "name": "1465(新)",
+    "online": true
+  },
+  {
+    "category": "265",
+    "cameraId": "551932052672",
+    "name": "4065(新)",
+    "online": true
+  },
+  {
+    "category": "269",
+    "cameraId": "551932054466",
+    "name": "1469(新)",
+    "online": true
+  },
+  {
+    "category": "269",
+    "cameraId": "551932053413",
+    "name": "4069(新)",
+    "online": true
+  },
+  {
+    "category": "270",
+    "cameraId": "551932053414",
+    "name": "4070(新)",
+    "online": true
+  },
+  {
+    "category": "270",
+    "cameraId": "551932054467",
+    "name": "1470(新)",
+    "online": true
+  },
+  {
+    "category": "272",
+    "cameraId": "551932053416",
+    "name": "4072(新)",
+    "online": true
+  },
+  {
+    "category": "272",
+    "cameraId": "551932054532",
+    "name": "1472(新)",
+    "online": true
+  },
+  {
+    "category": "274",
+    "cameraId": "551932054534",
+    "name": "1474(新)",
+    "online": true
+  },
+  {
+    "category": "274",
+    "cameraId": "551932053418",
+    "name": "4074(新)",
+    "online": true
+  },
+  {
+    "category": "275",
+    "cameraId": "551932054556",
+    "name": "1475(新)",
+    "online": true
+  },
+  {
+    "category": "275",
+    "cameraId": "551932053440",
+    "name": "4075(新)",
+    "online": true
+  }
+]

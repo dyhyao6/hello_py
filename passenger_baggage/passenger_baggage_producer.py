@@ -28,6 +28,8 @@ class PassengerBaggageProducer:
         self.es = self.get_es_client()
         self.kafka_producer = self.get_kafka_producer()
         self.kafka_topic = os.getenv("KAFKA_TOPIC_PASSENGER_BAGGAGE", "passenger_baggage")
+        self.kafka_topic_trays = os.getenv("KAFKA_TOPIC_PASSENGER_TRAYS", "passenger_trays")
+        self.kafka_topic_tags = os.getenv("KAFKA_TOPIC_PASSENGER_TAGS", "passenger_tags")
         self.last_timestamp = None
         self.running = True
         self.load_state()
@@ -174,28 +176,96 @@ class PassengerBaggageProducer:
                 }
                 
                 passengers = extra_data.get("frame", {}).get("passengers", [])
+                trays_data = []
+                tags_data = []
+                
+                frame_data = extra_data.get("frame", {})
+                frame_tags = frame_data.get("tags", [])
+                for tag in frame_tags:
+                    tag_record = base_fields.copy()
+                    tag_record["tag_text"] = tag.get("text", "")
+                    tag_record["tag_confidence"] = tag.get("confidence", 0.0)
+                    tag_record["tag_coordinate"] = tag.get("coordinate", [])
+                    tag_record["tag_center"] = tag.get("center", [])
+                    tag_record["tag_area"] = tag.get("area", 0)
+                    tag_record["tag_bbox"] = tag.get("bbox", [])
+                    tags_data.append(tag_record)
+                
                 if passengers:
                     for passenger in passengers:
                         record = base_fields.copy()
                         passenger_id = passenger.get("id", "")
+                        passenger_bbox = passenger.get("bbox", [])
                         confidence = passenger.get("confidence", 0.0)
                         face = passenger.get("face") or {}
                         face_bbox = face.get("bbox", [])
                         feature = face.get("feature", [])
                         
                         record["id"] = passenger_id
+                        record["passenger_bbox"] = passenger_bbox
                         record["confidence"] = confidence
                         record["face_bbox"] = face_bbox
                         record["feature"] = feature
                         
                         new_data.append(record)
+                        
+                        trays = passenger.get("trays") or passenger.get("tray")
+                        if trays:
+                            if isinstance(trays, list):
+                                trays_list = trays
+                            else:
+                                trays_list = [trays]
+                        else:
+                            trays_list = []
+                        
+                        for tray in trays_list:
+                            tray_record = base_fields.copy()
+                            
+                            tray_record["passenger_id"] = passenger_id
+                            tray_record["passenger_bbox"] = passenger_bbox
+                            tray_record["passenger_confidence"] = confidence
+                            
+                            tray_record["tray_id"] = tray.get("id", "")
+                            tray_record["tray_bbox"] = tray.get("bbox", [])
+                            tray_record["tray_confidence"] = tray.get("confidence", 0.0)
+                            
+                            tag = tray.get("tag")
+                            if tag:
+                                tray_record["tag_text"] = tag.get("text", "")
+                                tray_record["tag_confidence"] = tag.get("confidence", 0.0)
+                                tray_record["tag_coordinate"] = tag.get("coordinate", [])
+                                tray_record["tag_center"] = tag.get("center", [])
+                                tray_record["tag_area"] = tag.get("area", 0)
+                                tray_record["tag_bbox"] = tag.get("bbox", [])
+                            else:
+                                tray_record["tag_text"] = ""
+                                tray_record["tag_confidence"] = 0.0
+                                tray_record["tag_coordinate"] = []
+                                tray_record["tag_center"] = []
+                                tray_record["tag_area"] = 0
+                                tray_record["tag_bbox"] = []
+                            
+                            tray_record["corners"] = tray.get("corners", [])
+                            tray_record["perspective_lines"] = tray.get("perspective_lines", [])
+                            tray_record["location"] = tray.get("location", [])
+                            
+                            trays_data.append(tray_record)
                 else:
                     record = base_fields.copy()
                     record["id"] = ""
+                    record["passenger_bbox"] = []
                     record["confidence"] = 0.0
                     record["face_bbox"] = []
                     record["feature"] = []
                     new_data.append(record)
+                logger.info(f"Processed trays_data {len(new_data)} records")
+                if trays_data:
+                    self.send_to_kafka(trays_data, self.kafka_topic_trays)
+                    logger.info(f"Sent {len(trays_data)} tray records to Kafka topic: {self.kafka_topic_trays}")
+                
+                if tags_data:
+                    self.send_to_kafka(tags_data, self.kafka_topic_tags)
+                    logger.info(f"Sent {len(tags_data)} tag records to Kafka topic: {self.kafka_topic_tags}")
                 
                 time_str = base_fields.get("time", "")
                 if time_str and isinstance(time_str, str):
@@ -221,11 +291,14 @@ class PassengerBaggageProducer:
             logger.error(f"Unexpected error: {e}")
             return []
     
-    def send_to_kafka(self, data):
+    def send_to_kafka(self, data, topic=None):
+        if topic is None:
+            topic = self.kafka_topic
+            
         for record in data:
             try:
                 self.kafka_producer.produce(
-                    self.kafka_topic,
+                    topic,
                     json.dumps(record).encode('utf-8')
                 )
                 self.kafka_producer.poll(0)
@@ -266,3 +339,4 @@ class PassengerBaggageProducer:
 if __name__ == "__main__":
     producer = PassengerBaggageProducer()
     producer.run()
+# docker logs -f --tail 100 data-engine | awk '/Starting syncData for datasourceId: 33848dae-f7b6-4a2a-a76b-0ae4b134df54/ {c=50} c {print; c--}'

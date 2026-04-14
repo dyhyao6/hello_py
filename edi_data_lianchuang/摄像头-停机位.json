@@ -1,0 +1,254 @@
+[
+  {
+    "category": "213",
+    "cameraId": "551937628299",
+    "name": "HQ-0213A",
+    "online": false
+  },
+  {
+    "category": "213",
+    "cameraId": "551937628300",
+    "name": "HQ-0213B",
+    "online": false
+  },
+  {
+    "category": "215",
+    "cameraId": "551937628325",
+    "name": "HQ-0215B",
+    "online": true
+  },
+  {
+    "category": "215",
+    "cameraId": "551937628303",
+    "name": "HQ-0215A",
+    "online": true
+  },
+  {
+    "category": "216",
+    "cameraId": "551937628326",
+    "name": "HQ-0216A",
+    "online": true
+  },
+  {
+    "category": "216",
+    "cameraId": "551937628327",
+    "name": "HQ-0216B",
+    "online": true
+  },
+  {
+    "category": "224",
+    "cameraId": "551321646336",
+    "name": "HQ-0224B",
+    "online": true
+  },
+  {
+    "category": "224",
+    "cameraId": "551321646335",
+    "name": "HQ-0224A",
+    "online": true
+  },
+  {
+    "category": "225",
+    "cameraId": "551937629137",
+    "name": "HQ-0225A",
+    "online": true
+  },
+  {
+    "category": "225",
+    "cameraId": "551959850281",
+    "name": "HQ-0225B",
+    "online": true
+  },
+  {
+    "category": "227",
+    "cameraId": "551959851423",
+    "name": "HQ-0227B",
+    "online": true
+  },
+  {
+    "category": "227",
+    "cameraId": "551937629138",
+    "name": "HQ-0227A",
+    "online": true
+  },
+  {
+    "category": "228",
+    "cameraId": "551937629139",
+    "name": "HQ-0228A",
+    "online": true
+  },
+  {
+    "category": "228",
+    "cameraId": "551959851517",
+    "name": "HQ-0228B",
+    "online": true
+  },
+  {
+    "category": "231",
+    "cameraId": "551937629165",
+    "name": "HQ-0231A",
+    "online": true
+  },
+  {
+    "category": "231",
+    "cameraId": "551959879319",
+    "name": "HQ-0231B",
+    "online": true
+  },
+  {
+    "category": "232",
+    "cameraId": "551937629166",
+    "name": "HQ-0232A",
+    "online": true
+  },
+  {
+    "category": "232",
+    "cameraId": "551937689806",
+    "name": "HQ-0232B",
+    "online": true
+  },
+  {
+    "category": "234",
+    "cameraId": "559223372036811071014",
+    "name": "HQ-0234B",
+    "online": true
+  },
+  {
+    "category": "234",
+    "cameraId": "551937629163",
+    "name": "HQ-0234A",
+    "online": true
+  },
+  {
+    "category": "256",
+    "cameraId": "551937562853",
+    "name": "HQ-0256A",
+    "online": true
+  },
+  {
+    "category": "256",
+    "cameraId": "551937562947",
+    "name": "HQ-0256B",
+    "online": true
+  },
+  {
+    "category": "261",
+    "cameraId": "551960536652",
+    "name": "HQ-0261B",
+    "online": true
+  },
+  {
+    "category": "261",
+    "cameraId": "551960536558",
+    "name": "HQ-0261A",
+    "online": true
+  },
+  {
+    "category": "262",
+    "cameraId": "551937629233",
+    "name": "HQ-0262A",
+    "online": true
+  },
+  {
+    "category": "262",
+    "cameraId": "559223372036811071018",
+    "name": "HQ-0262B",
+    "online": true
+  },
+  {
+    "category": "263",
+    "cameraId": "551960564454",
+    "name": "HQ-0263B",
+    "online": true
+  },
+  {
+    "category": "263",
+    "cameraId": "551960564360",
+    "name": "HQ-0263A",
+    "online": true
+  },
+  {
+    "category": "265",
+    "cameraId": "551937629255",
+    "name": "HQ-0265A",
+    "online": false
+  },
+  {
+    "category": "265",
+    "cameraId": "551960565481",
+    "name": "HQ-0265B",
+    "online": true
+  },
+  {
+    "category": "269",
+    "cameraId": "551937629232",
+    "name": "HQ-0269A",
+    "online": true
+  },
+  {
+    "category": "269",
+    "cameraId": "551960595055",
+    "name": "HQ-0269B",
+    "online": true
+  },
+  {
+    "category": "270",
+    "cameraId": "551960595149",
+    "name": "HQ-0270A",
+    "online": true
+  },
+  {
+    "category": "270",
+    "cameraId": "551960596009",
+    "name": "HQ-0270B",
+    "online": true
+  },
+  {
+    "category": "272",
+    "cameraId": "551962471948",
+    "name": "HQ-0272B",
+    "online": true
+  },
+  {
+    "category": "272",
+    "cameraId": "551962471203",
+    "name": "HQ-0272A",
+    "online": true
+  },
+  {
+    "category": "274",
+    "cameraId": "551937629258",
+    "name": "HQ-0274A",
+    "online": true
+  },
+  {
+    "category": "274",
+    "cameraId": "551962473090",
+    "name": "HQ-0274B",
+    "online": true
+  },
+  {
+    "category": "275",
+    "cameraId": "551962473929",
+    "name": "HQ-0275B",
+    "online": true
+  },
+  {
+    "category": "275",
+    "cameraId": "551937629259",
+    "name": "HQ-0275A",
+    "online": true
+  },
+  {
+    "category": "276",
+    "cameraId": "551934852740",
+    "name": "HQ-0276B",
+    "online": true
+  },
+  {
+    "category": "276",
+    "cameraId": "551937629260",
+    "name": "HQ-0276A",
+    "online": true
+  }
+]

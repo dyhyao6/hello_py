@@ -10,7 +10,7 @@ def main():
     }
 
     consumer = Consumer(conf)
-    topic = 'pubsub_topic'
+    topic = 'airport_algorithm'
     consumer.subscribe([topic])
 
     print("Kafka 消费者已启动，开始监听消息。按 Ctrl+C 停止。")
