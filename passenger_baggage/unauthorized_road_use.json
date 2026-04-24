@@ -1,0 +1,109 @@
+{
+  "_index": "event-2026.04",
+  "_type": "_doc",
+  "_id": "HNTwuZ0BhdMjUxkTEQE7",
+  "_version": 2,
+  "_score": 1,
+  "_source": {
+    "camera_id": "559223372036492617852",
+    "session_id": "2f0a2307-6739-47f7-a6b5-254470b1dff3",
+    "created_at": "2026-04-23T18:43:31.251604+08:00",
+    "lon": 0,
+    "video": "2026/04/23/cf3e5155-ce62-40ad-90a7-c31895ac1a70_buf_7.mp4",
+    "type": "traffic management",
+    "message": "unauthorized_road_use",
+    "extra": "{\"detect_class\": \"person\", \"box\": [436, 382, 532, 535], \"roi\": [[689, 55], [72, 994], [1901, 1001], [1901, 540], [1022, 43], [756, 50], [725, 53]]}",
+    "x": 0,
+    "y": 0,
+    "loc_name": "七莘路地道入口S3HG",
+    "z": 0,
+    "time": "2026-04-23T18:43:27.301953+08:00",
+    "id": "2f0a2307-6739-47f7-a6b5-254470b1dff3_6912aeea-e89d-4b85-acb8-1bf188df58fd",
+    "camera_name": "七莘路地道入口S3HG",
+    "lat": 0,
+    "frame": "2026/04/23/6d41e9ed-13a9-4b50-a099-27ecc40ebf75_f_event_559223372036492617852.jpg"
+  },
+  "fields": {
+    "frame.keyword": [
+      "2026/04/23/6d41e9ed-13a9-4b50-a099-27ecc40ebf75_f_event_559223372036492617852.jpg"
+    ],
+    "created_at": [
+      "2026-04-23T10:43:31.251Z"
+    ],
+    "lon": [
+      0
+    ],
+    "video": [
+      "2026/04/23/cf3e5155-ce62-40ad-90a7-c31895ac1a70_buf_7.mp4"
+    ],
+    "type": [
+      "traffic management"
+    ],
+    "id.keyword": [
+      "2f0a2307-6739-47f7-a6b5-254470b1dff3_6912aeea-e89d-4b85-acb8-1bf188df58fd"
+    ],
+    "type.keyword": [
+      "traffic management"
+    ],
+    "extra": [
+      "{\"detect_class\": \"person\", \"box\": [436, 382, 532, 535], \"roi\": [[689, 55], [72, 994], [1901, 1001], [1901, 540], [1022, 43], [756, 50], [725, 53]]}"
+    ],
+    "loc_name.keyword": [
+      "七莘路地道入口S3HG"
+    ],
+    "loc_name": [
+      "七莘路地道入口S3HG"
+    ],
+    "id": [
+      "2f0a2307-6739-47f7-a6b5-254470b1dff3_6912aeea-e89d-4b85-acb8-1bf188df58fd"
+    ],
+    "camera_name": [
+      "七莘路地道入口S3HG"
+    ],
+    "lat": [
+      0
+    ],
+    "video.keyword": [
+      "2026/04/23/cf3e5155-ce62-40ad-90a7-c31895ac1a70_buf_7.mp4"
+    ],
+    "camera_id.keyword": [
+      "559223372036492617852"
+    ],
+    "camera_id": [
+      "559223372036492617852"
+    ],
+    "session_id": [
+      "2f0a2307-6739-47f7-a6b5-254470b1dff3"
+    ],
+    "message": [
+      "unauthorized_road_use"
+    ],
+    "extra.keyword": [
+      "{\"detect_class\": \"person\", \"box\": [436, 382, 532, 535], \"roi\": [[689, 55], [72, 994], [1901, 1001], [1901, 540], [1022, 43], [756, 50], [725, 53]]}"
+    ],
+    "camera_name.keyword": [
+      "七莘路地道入口S3HG"
+    ],
+    "message.keyword": [
+      "unauthorized_road_use"
+    ],
+    "x": [
+      0
+    ],
+    "y": [
+      0
+    ],
+    "session_id.keyword": [
+      "2f0a2307-6739-47f7-a6b5-254470b1dff3"
+    ],
+    "z": [
+      0
+    ],
+    "time": [
+      "2026-04-23T10:43:27.301Z"
+    ],
+    "frame": [
+      "2026/04/23/6d41e9ed-13a9-4b50-a099-27ecc40ebf75_f_event_559223372036492617852.jpg"
+    ]
+  }
+}

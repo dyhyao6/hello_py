@@ -41,6 +41,20 @@ class ProducerManager:
                 "state_file": "state/xray_ocr_state.json",
                 "container_name": "xray-ocr-producer",
                 "image_name": "xray-ocr-producer"
+            },
+            "unauthorized_road_use": {
+                "name": "Unauthorized Road Use Producer",
+                "script": "unauthorized_road_use_producer.py",
+                "state_file": "state/unauthorized_road_use_state.json",
+                "container_name": "unauthorized-road-use-producer",
+                "image_name": "unauthorized-road-use-producer"
+            },
+            "passenger_density": {
+                "name": "Passenger Density Producer",
+                "script": "passenger_density_producer.py",
+                "state_file": "state/passenger_density_state.json",
+                "container_name": "passenger-density-producer",
+                "image_name": "passenger-density-producer"
             }
         }
         self.processes = {}
@@ -181,9 +195,10 @@ def print_usage():
     logger.info("  status              - Show status of all producers")
     logger.info("  list                - List all available producers")
     logger.info("\nAvailable producers:")
-    logger.info("  passenger_baggage   - Passenger Baggage Producer (includes trays)")
-    logger.info("  face_vector        - Face Vector Producer")
-    logger.info("  xray_ocr          - X-ray OCR Producer")
+    logger.info("  passenger_baggage    - Passenger Baggage Producer (includes trays)")
+    logger.info("  face_vector         - Face Vector Producer")
+    logger.info("  xray_ocr           - X-ray OCR Producer")
+    logger.info("  unauthorized_road_use - Unauthorized Road Use Producer")
     logger.info("\nExamples:")
     logger.info("  python manager.py start passenger_baggage")
     logger.info("  python manager.py stop all")

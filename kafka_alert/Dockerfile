@@ -1,5 +1,5 @@
 # 基础镜像
-FROM python:3.10-slim
+FROM docker.m.daocloud.io/library/python:3.10-slim
 
 # 设置工作目录
 WORKDIR /app

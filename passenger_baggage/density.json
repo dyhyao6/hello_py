@@ -1,0 +1,109 @@
+{
+  "_index": "event-2026.04",
+  "_type": "_doc",
+  "_id": "Od_Xvp0BF2eF15NM4Jd-",
+  "_version": 1,
+  "_score": 1,
+  "_source": {
+    "session_id": "bd432b8e-62d3-4a30-8959-33f2ab5bbaf0",
+    "loc_name": "7173",
+    "lat": 0,
+    "lon": 0,
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "type": "passenger density by grid",
+    "message": "busy",
+    "frame": "2026/04/24/e4c44bc8-2e7f-4937-bb01-b01d728ca8fb_f_event_551932024517.jpg",
+    "video": "-199",
+    "time": "2026-04-24T17:35:02.899260+08:00",
+    "extra": "{\"data\": {\"roi_id\": \"44d9b34053b2445488cbbf45ba785cc1\", \"roi_name\": \"\\u5b89\\u68c0\\u6392\\u961f\\u533a41-42\", \"area_density\": 0.44, \"alert_name\": \"\\u7e41\\u5fd9\", \"people_cnt\": 22, \"crowd_per\": 0.205}}",
+    "camera_id": "551932024517",
+    "camera_name": "7173",
+    "created_at": "2026-04-24T17:35:11.994697+08:00",
+    "id": "bd432b8e-62d3-4a30-8959-33f2ab5bbaf0_5ebc46a7-6631-456f-b151-c92f6a47c3cf"
+  },
+  "fields": {
+    "frame.keyword": [
+      "2026/04/24/e4c44bc8-2e7f-4937-bb01-b01d728ca8fb_f_event_551932024517.jpg"
+    ],
+    "created_at": [
+      "2026-04-24T09:35:11.994Z"
+    ],
+    "lon": [
+      0
+    ],
+    "video": [
+      "-199"
+    ],
+    "type": [
+      "passenger density by grid"
+    ],
+    "id.keyword": [
+      "bd432b8e-62d3-4a30-8959-33f2ab5bbaf0_5ebc46a7-6631-456f-b151-c92f6a47c3cf"
+    ],
+    "type.keyword": [
+      "passenger density by grid"
+    ],
+    "extra": [
+      "{\"data\": {\"roi_id\": \"44d9b34053b2445488cbbf45ba785cc1\", \"roi_name\": \"\\u5b89\\u68c0\\u6392\\u961f\\u533a41-42\", \"area_density\": 0.44, \"alert_name\": \"\\u7e41\\u5fd9\", \"people_cnt\": 22, \"crowd_per\": 0.205}}"
+    ],
+    "loc_name.keyword": [
+      "7173"
+    ],
+    "loc_name": [
+      "7173"
+    ],
+    "id": [
+      "bd432b8e-62d3-4a30-8959-33f2ab5bbaf0_5ebc46a7-6631-456f-b151-c92f6a47c3cf"
+    ],
+    "camera_name": [
+      "7173"
+    ],
+    "lat": [
+      0
+    ],
+    "video.keyword": [
+      "-199"
+    ],
+    "camera_id.keyword": [
+      "551932024517"
+    ],
+    "camera_id": [
+      "551932024517"
+    ],
+    "session_id": [
+      "bd432b8e-62d3-4a30-8959-33f2ab5bbaf0"
+    ],
+    "message": [
+      "busy"
+    ],
+    "extra.keyword": [
+      "{\"data\": {\"roi_id\": \"44d9b34053b2445488cbbf45ba785cc1\", \"roi_name\": \"\\u5b89\\u68c0\\u6392\\u961f\\u533a41-42\", \"area_density\": 0.44, \"alert_name\": \"\\u7e41\\u5fd9\", \"people_cnt\": 22, \"crowd_per\": 0.205}}"
+    ],
+    "camera_name.keyword": [
+      "7173"
+    ],
+    "message.keyword": [
+      "busy"
+    ],
+    "x": [
+      0
+    ],
+    "y": [
+      0
+    ],
+    "session_id.keyword": [
+      "bd432b8e-62d3-4a30-8959-33f2ab5bbaf0"
+    ],
+    "z": [
+      0
+    ],
+    "time": [
+      "2026-04-24T09:35:02.899Z"
+    ],
+    "frame": [
+      "2026/04/24/e4c44bc8-2e7f-4937-bb01-b01d728ca8fb_f_event_551932024517.jpg"
+    ]
+  }
+}

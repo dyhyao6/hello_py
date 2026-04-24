@@ -9,7 +9,7 @@ COPY safeguard_sync.py .
 COPY manager.py .
 COPY requirements.txt .
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/
 
 ENV TZ=Asia/Shanghai
 

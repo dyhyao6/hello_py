@@ -9,8 +9,6 @@ scp es-sync-producers.tar root@your-server:/data/es-sync/
 # 服务器上导入镜像
 docker load -i es-sync-producers.tar
 
-# 启动容器（只挂载状态文件目录）
-docker run -d --name es-sync-producers -v /data/es-sync/state:/app/state --env-file /data/es-sync/.env es-sync-producers:latest
 
 # 查看日志
 docker logs -f --tail 200 es-sync-producers

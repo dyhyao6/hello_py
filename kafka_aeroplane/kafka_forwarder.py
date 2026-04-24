@@ -16,7 +16,10 @@ TOPICS = [
     "passenger_baggage",
     "passenger_trays",
     "passenger_tags",
-    "xray_ocr_result"
+    "xray_ocr_result",
+    "unauthorized_road_use",
+    "passenger_density_by_grid",
+
 ]
 
 GROUP_ID_PREFIX = "kafka_forwarder_v3"
