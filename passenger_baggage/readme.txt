@@ -4,7 +4,7 @@ docker build --platform linux/amd64 -t es-sync-producers:latest .
 docker save -o es-sync-producers.tar es-sync-producers:latest
 
 # 上传镜像到服务器
-scp es-sync-producers.tar root@your-server:/data/es-sync/
+mv /tmp/es-sync-producers.tar ./
 
 # 服务器上导入镜像
 docker load -i es-sync-producers.tar

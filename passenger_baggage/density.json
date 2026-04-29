@@ -1,91 +1,91 @@
 {
   "_index": "event-2026.04",
   "_type": "_doc",
-  "_id": "Od_Xvp0BF2eF15NM4Jd-",
-  "_version": 1,
+  "_id": "ELtB150BixmTfY71iWDj",
+  "_version": 2,
   "_score": 1,
   "_source": {
-    "session_id": "bd432b8e-62d3-4a30-8959-33f2ab5bbaf0",
-    "loc_name": "7173",
-    "lat": 0,
+    "camera_id": "551937689620",
+    "session_id": "4bc19a0e-c172-440d-9f9a-385351b17338",
+    "created_at": "2026-04-29T11:21:29.827392+08:00",
     "lon": 0,
+    "video": "2026/04/29/5882140c-3f36-46ea-955b-327a0e7540b3_buf_757.mp4",
+    "type": "passenger density by grid",
+    "message": "unblocked",
+    "extra": "{\"data\": {\"roi_id\": \"3b3ccbfa63804fd08191e15bbb2fbbb6\", \"roi_name\": \"\\u503c\\u673a\\u67dc\\u53f0B\\u533a\\u57df\", \"area_density\": 0.44, \"alert_name\": \"\\u7545\\u901a\", \"people_cnt\": 22, \"crowd_per\": 0.029}}",
     "x": 0,
     "y": 0,
+    "loc_name": "B岛柜台区域全景",
     "z": 0,
-    "type": "passenger density by grid",
-    "message": "busy",
-    "frame": "2026/04/24/e4c44bc8-2e7f-4937-bb01-b01d728ca8fb_f_event_551932024517.jpg",
-    "video": "-199",
-    "time": "2026-04-24T17:35:02.899260+08:00",
-    "extra": "{\"data\": {\"roi_id\": \"44d9b34053b2445488cbbf45ba785cc1\", \"roi_name\": \"\\u5b89\\u68c0\\u6392\\u961f\\u533a41-42\", \"area_density\": 0.44, \"alert_name\": \"\\u7e41\\u5fd9\", \"people_cnt\": 22, \"crowd_per\": 0.205}}",
-    "camera_id": "551932024517",
-    "camera_name": "7173",
-    "created_at": "2026-04-24T17:35:11.994697+08:00",
-    "id": "bd432b8e-62d3-4a30-8959-33f2ab5bbaf0_5ebc46a7-6631-456f-b151-c92f6a47c3cf"
+    "time": "2026-04-29T11:19:33.640026+08:00",
+    "id": "4bc19a0e-c172-440d-9f9a-385351b17338_f0b992e9-f96a-4512-b011-3f2f77323e6e",
+    "camera_name": "B岛柜台区域全景",
+    "lat": 0,
+    "frame": "2026/04/29/9919905f-9028-489b-a61b-156f5cbff55e_f_event_551937689620.jpg"
   },
   "fields": {
     "frame.keyword": [
-      "2026/04/24/e4c44bc8-2e7f-4937-bb01-b01d728ca8fb_f_event_551932024517.jpg"
+      "2026/04/29/9919905f-9028-489b-a61b-156f5cbff55e_f_event_551937689620.jpg"
     ],
     "created_at": [
-      "2026-04-24T09:35:11.994Z"
+      "2026-04-29T03:21:29.827Z"
     ],
     "lon": [
       0
     ],
     "video": [
-      "-199"
+      "2026/04/29/5882140c-3f36-46ea-955b-327a0e7540b3_buf_757.mp4"
     ],
     "type": [
       "passenger density by grid"
     ],
     "id.keyword": [
-      "bd432b8e-62d3-4a30-8959-33f2ab5bbaf0_5ebc46a7-6631-456f-b151-c92f6a47c3cf"
+      "4bc19a0e-c172-440d-9f9a-385351b17338_f0b992e9-f96a-4512-b011-3f2f77323e6e"
     ],
     "type.keyword": [
       "passenger density by grid"
     ],
     "extra": [
-      "{\"data\": {\"roi_id\": \"44d9b34053b2445488cbbf45ba785cc1\", \"roi_name\": \"\\u5b89\\u68c0\\u6392\\u961f\\u533a41-42\", \"area_density\": 0.44, \"alert_name\": \"\\u7e41\\u5fd9\", \"people_cnt\": 22, \"crowd_per\": 0.205}}"
+      "{\"data\": {\"roi_id\": \"3b3ccbfa63804fd08191e15bbb2fbbb6\", \"roi_name\": \"\\u503c\\u673a\\u67dc\\u53f0B\\u533a\\u57df\", \"area_density\": 0.44, \"alert_name\": \"\\u7545\\u901a\", \"people_cnt\": 22, \"crowd_per\": 0.029}}"
     ],
     "loc_name.keyword": [
-      "7173"
+      "B岛柜台区域全景"
     ],
     "loc_name": [
-      "7173"
+      "B岛柜台区域全景"
     ],
     "id": [
-      "bd432b8e-62d3-4a30-8959-33f2ab5bbaf0_5ebc46a7-6631-456f-b151-c92f6a47c3cf"
+      "4bc19a0e-c172-440d-9f9a-385351b17338_f0b992e9-f96a-4512-b011-3f2f77323e6e"
     ],
     "camera_name": [
-      "7173"
+      "B岛柜台区域全景"
     ],
     "lat": [
       0
     ],
     "video.keyword": [
-      "-199"
+      "2026/04/29/5882140c-3f36-46ea-955b-327a0e7540b3_buf_757.mp4"
     ],
     "camera_id.keyword": [
-      "551932024517"
+      "551937689620"
     ],
     "camera_id": [
-      "551932024517"
+      "551937689620"
     ],
     "session_id": [
-      "bd432b8e-62d3-4a30-8959-33f2ab5bbaf0"
+      "4bc19a0e-c172-440d-9f9a-385351b17338"
     ],
     "message": [
-      "busy"
+      "unblocked"
     ],
     "extra.keyword": [
-      "{\"data\": {\"roi_id\": \"44d9b34053b2445488cbbf45ba785cc1\", \"roi_name\": \"\\u5b89\\u68c0\\u6392\\u961f\\u533a41-42\", \"area_density\": 0.44, \"alert_name\": \"\\u7e41\\u5fd9\", \"people_cnt\": 22, \"crowd_per\": 0.205}}"
+      "{\"data\": {\"roi_id\": \"3b3ccbfa63804fd08191e15bbb2fbbb6\", \"roi_name\": \"\\u503c\\u673a\\u67dc\\u53f0B\\u533a\\u57df\", \"area_density\": 0.44, \"alert_name\": \"\\u7545\\u901a\", \"people_cnt\": 22, \"crowd_per\": 0.029}}"
     ],
     "camera_name.keyword": [
-      "7173"
+      "B岛柜台区域全景"
     ],
     "message.keyword": [
-      "busy"
+      "unblocked"
     ],
     "x": [
       0
@@ -94,16 +94,16 @@
       0
     ],
     "session_id.keyword": [
-      "bd432b8e-62d3-4a30-8959-33f2ab5bbaf0"
+      "4bc19a0e-c172-440d-9f9a-385351b17338"
     ],
     "z": [
       0
     ],
     "time": [
-      "2026-04-24T09:35:02.899Z"
+      "2026-04-29T03:19:33.640Z"
     ],
     "frame": [
-      "2026/04/24/e4c44bc8-2e7f-4937-bb01-b01d728ca8fb_f_event_551932024517.jpg"
+      "2026/04/29/9919905f-9028-489b-a61b-156f5cbff55e_f_event_551937689620.jpg"
     ]
   }
 }

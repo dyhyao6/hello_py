@@ -93,12 +93,12 @@ class PassengerDensityProducer:
 
     def get_new_data(self):
         camera_names = [
-            "A岛柜台区域全景",
+            # "A岛柜台区域全景",
             "B岛柜台区域全景",
-            "C岛柜台区域全景",
-            "D岛柜台区域全景",
-            "E岛柜台区域全景",
-            "F岛柜台区域全景"
+            # "C岛柜台区域全景",
+            # "D岛柜台区域全景",
+            # "E岛柜台区域全景",
+            # "F柜台区域全景"
         ]
 
         query = {
@@ -204,6 +204,8 @@ class PassengerDensityProducer:
 
     def send_to_kafka(self, data):
         for record in data:
+            if record.get("camera_name", "")=="B岛柜台区域全景":
+                logger.info(f"found B岛柜台区域全景 record ")
             try:
                 self.kafka_producer.produce(
                     self.kafka_topic,
@@ -222,7 +224,7 @@ class PassengerDensityProducer:
         logger.info(f"Fetching data from Elasticsearch and sending to Kafka topic: {self.kafka_topic}")
         logger.info(f"Filter: type.keyword = 'passenger density by grid'")
         logger.info(
-            f"Filter: camera_name.keyword in [A岛柜台区域全景, B岛柜台区域全景, C岛柜台区域全景, D岛柜台区域全景, E岛柜台区域全景, F岛柜台区域全景]")
+            f"Filter: camera_name.keyword in [A岛柜台区域全景, B岛柜台区域全景, C岛柜台区域全景, D岛柜台区域全景, E岛柜台区域全景, F柜台区域全景]")
         logger.info(f"Polling interval: {interval} seconds")
         logger.info("Press Ctrl+C to stop\n")
 
