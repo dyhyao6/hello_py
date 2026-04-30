@@ -11,7 +11,7 @@ SOURCE_BROKER = "10.143.41.12:9092"
 TARGET_BROKER = "172.16.11.15:9092"
 
 TOPICS = [
-    "airport_algorithm",
+    # "airport_algorithm",
     "saa-recognized-face-vector",
     "passenger_baggage",
     "passenger_trays",

@@ -53,6 +53,6 @@ class KafkaClient:
             consumer.close()
 
 if __name__ == "__main__":
-    client = KafkaClient(bootstrap_servers="localhost:9092")
+    client = KafkaClient(bootstrap_servers="172.16.11.15:9092")
     # client.create_topic("airport_algorithm")
     print("Topics:", client.list_topics())
