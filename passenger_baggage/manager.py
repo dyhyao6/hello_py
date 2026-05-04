@@ -55,6 +55,13 @@ class ProducerManager:
                 "state_file": "state/passenger_density_state.json",
                 "container_name": "passenger-density-producer",
                 "image_name": "passenger-density-producer"
+            },
+            "safeguard": {
+                "name": "Safeguard Producer",
+                "script": "safeguard_producer.py",
+                "state_file": "state/safeguard_state.json",
+                "container_name": "safeguard-producer",
+                "image_name": "safeguard-producer"
             }
         }
         self.processes = {}
@@ -199,6 +206,7 @@ def print_usage():
     logger.info("  face_vector         - Face Vector Producer")
     logger.info("  xray_ocr           - X-ray OCR Producer")
     logger.info("  unauthorized_road_use - Unauthorized Road Use Producer")
+    logger.info("  safeguard          - Safeguard Producer")
     logger.info("\nExamples:")
     logger.info("  python manager.py start passenger_baggage")
     logger.info("  python manager.py stop all")

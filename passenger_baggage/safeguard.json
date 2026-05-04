@@ -1,0 +1,109 @@
+{
+  "_index": "event-2026.04",
+  "_type": "_doc",
+  "_id": "2suk8Z0BF2eF15NMtCJy",
+  "_version": 1,
+  "_score": 1,
+  "_source": {
+    "session_id": "43036855-853c-4ded-a240-c5def1569155",
+    "loc_name": "20265D",
+    "lat": 0,
+    "lon": 0,
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "type": "safeguard",
+    "message": "aeroplane out",
+    "frame": "2026/05/04/3cddbd93-48b0-4a09-bfec-9e3b70aa994b_f_event_551250419221.jpg",
+    "video": "446",
+    "time": "2026-05-04T14:19:55.805294+08:00",
+    "extra": "{\"position\": \"HQ-z265B\", \"type\": \"A320_A32N\"}",
+    "camera_id": "551250419221",
+    "camera_name": "20265D",
+    "created_at": "2026-05-04T14:19:56.402786+08:00",
+    "id": "43036855-853c-4ded-a240-c5def1569155_60a6a510-daa8-4ddc-94c6-bffeda0c5874"
+  },
+  "fields": {
+    "frame.keyword": [
+      "2026/05/04/3cddbd93-48b0-4a09-bfec-9e3b70aa994b_f_event_551250419221.jpg"
+    ],
+    "created_at": [
+      "2026-05-04T06:19:56.402Z"
+    ],
+    "lon": [
+      0
+    ],
+    "video": [
+      "446"
+    ],
+    "type": [
+      "safeguard"
+    ],
+    "id.keyword": [
+      "43036855-853c-4ded-a240-c5def1569155_60a6a510-daa8-4ddc-94c6-bffeda0c5874"
+    ],
+    "type.keyword": [
+      "safeguard"
+    ],
+    "extra": [
+      "{\"position\": \"HQ-z265B\", \"type\": \"A320_A32N\"}"
+    ],
+    "loc_name.keyword": [
+      "20265D"
+    ],
+    "loc_name": [
+      "20265D"
+    ],
+    "id": [
+      "43036855-853c-4ded-a240-c5def1569155_60a6a510-daa8-4ddc-94c6-bffeda0c5874"
+    ],
+    "camera_name": [
+      "20265D"
+    ],
+    "lat": [
+      0
+    ],
+    "video.keyword": [
+      "446"
+    ],
+    "camera_id.keyword": [
+      "551250419221"
+    ],
+    "camera_id": [
+      "551250419221"
+    ],
+    "session_id": [
+      "43036855-853c-4ded-a240-c5def1569155"
+    ],
+    "message": [
+      "aeroplane out"
+    ],
+    "extra.keyword": [
+      "{\"position\": \"HQ-z265B\", \"type\": \"A320_A32N\"}"
+    ],
+    "camera_name.keyword": [
+      "20265D"
+    ],
+    "message.keyword": [
+      "aeroplane out"
+    ],
+    "x": [
+      0
+    ],
+    "y": [
+      0
+    ],
+    "session_id.keyword": [
+      "43036855-853c-4ded-a240-c5def1569155"
+    ],
+    "z": [
+      0
+    ],
+    "time": [
+      "2026-05-04T06:19:55.805Z"
+    ],
+    "frame": [
+      "2026/05/04/3cddbd93-48b0-4a09-bfec-9e3b70aa994b_f_event_551250419221.jpg"
+    ]
+  }
+}

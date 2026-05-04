@@ -19,6 +19,7 @@ TOPICS = [
     "xray_ocr_result",
     "unauthorized_road_use",
     "passenger_density_by_grid",
+    "safeguard_event",
 
 ]
 
