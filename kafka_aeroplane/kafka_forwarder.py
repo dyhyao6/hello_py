@@ -20,6 +20,7 @@ TOPICS = [
     "unauthorized_road_use",
     "passenger_density_by_grid",
     "safeguard_event",
+    "passenger_overflow_new_plan",
 
 ]
 

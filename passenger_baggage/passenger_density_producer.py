@@ -93,12 +93,12 @@ class PassengerDensityProducer:
 
     def get_new_data(self):
         camera_names = [
-            # "A岛柜台区域全景",
+            "A岛柜台区域全景",
             "B岛柜台区域全景",
-            # "C岛柜台区域全景",
-            # "D岛柜台区域全景",
-            # "E岛柜台区域全景",
-            # "F柜台区域全景"
+            "C岛柜台区域全景",
+            "D岛柜台区域全景",
+            "E岛柜台区域全景",
+            "F柜台区域全景"
         ]
 
         query = {

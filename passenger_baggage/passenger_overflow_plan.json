@@ -1,0 +1,109 @@
+{
+  "_index": "event-2026.04",
+  "_type": "_doc",
+  "_id": "piyO8p0BixmTfY718AUq",
+  "_version": 2,
+  "_score": 1,
+  "_source": {
+    "camera_id": "551937689645",
+    "session_id": "3a4db73d-9697-4a47-bef8-2aab3234ba63",
+    "created_at": "2026-05-04T18:35:47.096741+08:00",
+    "lon": 0,
+    "video": "2026/05/04/eb1bbe34-b2e1-4887-b5e3-048d3b9f70f9_buf_22402.mp4",
+    "type": "passenger density by grid",
+    "message": "passenger overflow new plan",
+    "extra": "{\"data\": {\"roi_id\": \"d9f4e6c4378701b527cdd37eceea857b\", \"roi_name\": \"D\\u5c9b1\", \"person_num\": 80, \"alert_level\": 2}}",
+    "x": 0,
+    "y": 0,
+    "loc_name": "D岛柜台区域全景",
+    "z": 0,
+    "time": "2026-05-04T18:35:11.625623+08:00",
+    "id": "3a4db73d-9697-4a47-bef8-2aab3234ba63_4c1e08cf-148d-4c2d-b450-73209c0e948d",
+    "camera_name": "D岛柜台区域全景",
+    "lat": 0,
+    "frame": "2026/05/04/7ccac517-defc-40d9-ae0f-8835dfb0e9e6_f_event_551937689645.jpg"
+  },
+  "fields": {
+    "frame.keyword": [
+      "2026/05/04/7ccac517-defc-40d9-ae0f-8835dfb0e9e6_f_event_551937689645.jpg"
+    ],
+    "created_at": [
+      "2026-05-04T10:35:47.096Z"
+    ],
+    "lon": [
+      0
+    ],
+    "video": [
+      "2026/05/04/eb1bbe34-b2e1-4887-b5e3-048d3b9f70f9_buf_22402.mp4"
+    ],
+    "type": [
+      "passenger density by grid"
+    ],
+    "id.keyword": [
+      "3a4db73d-9697-4a47-bef8-2aab3234ba63_4c1e08cf-148d-4c2d-b450-73209c0e948d"
+    ],
+    "type.keyword": [
+      "passenger density by grid"
+    ],
+    "extra": [
+      "{\"data\": {\"roi_id\": \"d9f4e6c4378701b527cdd37eceea857b\", \"roi_name\": \"D\\u5c9b1\", \"person_num\": 80, \"alert_level\": 2}}"
+    ],
+    "loc_name.keyword": [
+      "D岛柜台区域全景"
+    ],
+    "loc_name": [
+      "D岛柜台区域全景"
+    ],
+    "id": [
+      "3a4db73d-9697-4a47-bef8-2aab3234ba63_4c1e08cf-148d-4c2d-b450-73209c0e948d"
+    ],
+    "camera_name": [
+      "D岛柜台区域全景"
+    ],
+    "lat": [
+      0
+    ],
+    "video.keyword": [
+      "2026/05/04/eb1bbe34-b2e1-4887-b5e3-048d3b9f70f9_buf_22402.mp4"
+    ],
+    "camera_id.keyword": [
+      "551937689645"
+    ],
+    "camera_id": [
+      "551937689645"
+    ],
+    "session_id": [
+      "3a4db73d-9697-4a47-bef8-2aab3234ba63"
+    ],
+    "message": [
+      "passenger overflow new plan"
+    ],
+    "extra.keyword": [
+      "{\"data\": {\"roi_id\": \"d9f4e6c4378701b527cdd37eceea857b\", \"roi_name\": \"D\\u5c9b1\", \"person_num\": 80, \"alert_level\": 2}}"
+    ],
+    "camera_name.keyword": [
+      "D岛柜台区域全景"
+    ],
+    "message.keyword": [
+      "passenger overflow new plan"
+    ],
+    "x": [
+      0
+    ],
+    "y": [
+      0
+    ],
+    "session_id.keyword": [
+      "3a4db73d-9697-4a47-bef8-2aab3234ba63"
+    ],
+    "z": [
+      0
+    ],
+    "time": [
+      "2026-05-04T10:35:11.625Z"
+    ],
+    "frame": [
+      "2026/05/04/7ccac517-defc-40d9-ae0f-8835dfb0e9e6_f_event_551937689645.jpg"
+    ]
+  }
+}

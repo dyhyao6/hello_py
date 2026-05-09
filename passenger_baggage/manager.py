@@ -62,6 +62,13 @@ class ProducerManager:
                 "state_file": "state/safeguard_state.json",
                 "container_name": "safeguard-producer",
                 "image_name": "safeguard-producer"
+            },
+            "passenger_overflow_new_plan": {
+                "name": "Passenger Overflow New Plan Producer",
+                "script": "passenger_overflow_new_plan_producer.py",
+                "state_file": "state/passenger_overflow_new_plan_state.json",
+                "container_name": "passenger-overflow-new-plan-producer",
+                "image_name": "passenger-overflow-new-plan-producer"
             }
         }
         self.processes = {}
@@ -207,6 +214,7 @@ def print_usage():
     logger.info("  xray_ocr           - X-ray OCR Producer")
     logger.info("  unauthorized_road_use - Unauthorized Road Use Producer")
     logger.info("  safeguard          - Safeguard Producer")
+    logger.info("  passenger_overflow_new_plan - Passenger Overflow New Plan Producer")
     logger.info("\nExamples:")
     logger.info("  python manager.py start passenger_baggage")
     logger.info("  python manager.py stop all")

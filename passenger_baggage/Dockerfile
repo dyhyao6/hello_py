@@ -14,6 +14,7 @@ COPY xray_ocr_producer.py .
 COPY unauthorized_road_use_producer.py .
 COPY passenger_density_producer.py .
 COPY safeguard_producer.py .
+COPY passenger_overflow_new_plan_producer.py .
 COPY manager.py .
 COPY requirements.txt .
 

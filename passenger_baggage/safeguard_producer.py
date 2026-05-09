@@ -51,7 +51,21 @@ CAMERA_IDS = [
     "55127332242",  # A9332-102机位正面
 ]
 
-STAND_ID_DICT = {"551390905722":"102",}
+STAND_ID_DICT = {
+    "551390905722": "102",
+    "55766581901": "102",
+    "559223372036375336345": "028",
+    "559223372035809610777": "027",
+    "55418322019": "027",
+    "55440508238": "028",
+    "55108135936": "028",
+    "559223372034831734721": "027",
+    "55295241549": "028",
+    "559223372036722235232": "027",
+    "551271570152": "102",
+    "551242800695": "102",
+    "55127332242": "102",
+}
 
 safeguard_dict = {
     "aeroplane in": "飞机入位",
@@ -213,7 +227,8 @@ class SafeguardProducer:
                     "video": "http://10.143.32.202/edi-data/" + source.get("video", ""),
                     "time": source.get("time", ""),
                     "position": extra_data.get("position", ""),
-                    "aircraft_type": extra_data.get("type", "")
+                    "aircraft_type": extra_data.get("type", ""),
+                    "stand_id": STAND_ID_DICT.get(source.get("camera_id", ""), "")
                 }
 
                 new_data.append(record)
