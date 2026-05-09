@@ -137,6 +137,32 @@ def query_post_roi_from_source(camera_id: str):
     return post_safeguard_list, safety_scenarios_list
 
 
+def query_grid_from_source(camera_id: str):
+    """从源库查询 v_algorithm_param_grid 视图，返回 index, point, geopoint 数据"""
+    conn = get_source_connection()
+    cur = conn.cursor(cursor_factory=RealDictCursor)
+
+    sql = """
+        SELECT index, point, gis
+        FROM v_algorithm_param_grid
+        WHERE camera_id = %s
+        LIMIT 1
+    """
+    cur.execute(sql, (camera_id,))
+    row = cur.fetchone()
+    cur.close()
+    conn.close()
+
+    if not row:
+        return None
+
+    return {
+        "index": parse_json_field(row["index"]),
+        "point": parse_json_field(row["point"]),
+        "geopoint": parse_json_field(row["gis"])
+    }
+
+
 def update_camera_instance(camera_id: str, new_properties: dict):
     """更新 Camera 实例的 properties 字段"""
     conn = get_target_connection()
@@ -187,12 +213,23 @@ def process_stand(stand_id: str):
 
         # 查询源库 roi 数据
         post_safeguard, safety_scenarios = query_post_roi_from_source(camera_id)
-        print(f"  源库数据: postSafeguard={len(post_safeguard)}条, safetyScenarios={len(safety_scenarios)}条")
+        print(f"  源库 roi 数据: postSafeguard={len(post_safeguard)}条, safetyScenarios={len(safety_scenarios)}条")
 
-        # 构建新 properties（保留原 properties 中的基础字段，更新 roi 相关字段）
+        # 查询源库 grid 数据 (index, point, geopoint)
+        grid_data = query_grid_from_source(camera_id)
+        if grid_data:
+            print(f"  源库 grid 数据: index={len(grid_data['index'])}项, point={len(grid_data['point'])}项, geopoint={len(grid_data['geopoint'])}项")
+        else:
+            print(f"  源库 grid 数据: 未找到")
+
+        # 构建新 properties（保留原 properties 中的基础字段，更新 roi 和 grid 相关字段）
         new_properties = dict(original_properties)
         new_properties["postSafeguard"] = post_safeguard
         new_properties["safetyScenarios"] = safety_scenarios
+        if grid_data:
+            new_properties["index"] = grid_data["index"]
+            new_properties["point"] = grid_data["point"]
+            new_properties["geopoint"] = grid_data["geopoint"]
 
         # 更新目标库
         affected = update_camera_instance(camera_id, new_properties)

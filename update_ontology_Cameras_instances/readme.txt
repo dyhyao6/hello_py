@@ -53,3 +53,38 @@ CREATE TABLE "public"."object_instances" (
   CONSTRAINT "object_instances_pkey" PRIMARY KEY ("id")
 );
 
+
+2026-05-09 16:00:00
+5、需要从视图 v_algorithm_param_grid里获取 Camera实例properties字段里的几个字段数据 包括 index ，point，geopoint ， 然后更新到 Camera实例的properties字段里。
+v_algorithm_param_grid 视图：
+CREATE VIEW "public"."v_algorithm_param_grid" AS  SELECT id,
+    camera_name,
+    camera_id,
+    point,
+    index,
+    gis,
+    version,
+    created_at,
+    updated_at
+   FROM algorithm_param_grid
+  WHERE version = (( SELECT max(algorithm_param_version.version) AS max
+           FROM algorithm_param_version));
+
+6、写一个脚本
+1、给你一个 StandId，根据这个 StandId 查询 object_instances 表中 object_type_api_name 为 "Stand" 的记录是否存在 StandID 是 某个值的 实例 ，如果不存在就新增到 表里 ，存在的话 我会给你一个 cameraIds 列表 更新 属性的数据 。
+
+
+7、写一个脚本 manage_camera_instances.py
+功能：
+1、给你数据字典 {"name": "4034(新)", "cameraID": "551932025727","areaCode": "234"}，根据这个 cameraID 查询 object_instances :
+根据 properties字段中的cameraID，遍历 cameraID ,
+执行 SELECT * FROM object_instances
+  WHERE "object_type_api_name" = 'Camera'
+  AND "state" = 'ACTIVE'
+  AND "properties"::text LIKE '%55127332242%'
+	ORDER BY created_at desc ;
+	，拿到properties字段数据。
+检查 Camera 实例是否存在，如果存在就更新属性数据，不存在就新增实例到表里。
+最终需要properties的字段有 ：
+{"name": "4034(新)", "index": [], "point": [], "areaCode": "234", "cameraID": "551932025727", "geopoint": [], "isActive": true, "postSafeguard": [], "safetyScenarios": []}
+对应的字段需要到对应的表里查询获取数据， 比如 index ，point，geopoint 需要到 v_algorithm_param_grid 视图里查询获取数据。 postSafeguard 和 safetyScenarios 需要到 v_algorithm_param_post_roi 视图里查询获取数据。
