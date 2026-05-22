@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-ROI 数据校验脚本
-功能：根据 cameraID、type、area_title、aircraft_model 查询源库和目标库，对比 roi 数据是否一致
+ROI + Grid 数据校验脚本
+功能：根据 cameraID 查询源库和目标库，对比 index、point、geopoint、postSafeguard、safetyScenarios 数据是否一致
 """
 
 import json
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
-# 源库配置（只读，查询 v_algorithm_param_post_roi）
+# 源库配置
 SOURCE_DB_CONFIG = {
     "host": "10.143.36.7",
     "port": 31647,
@@ -17,7 +17,7 @@ SOURCE_DB_CONFIG = {
     "password": "88UM6Joj7BhBPKjN0E1B"
 }
 
-# 目标库配置（查询 object_instances）
+# 目标库配置
 TARGET_DB_CONFIG = {
     "host": "172.16.11.20",
     "port": 54332,
@@ -27,8 +27,48 @@ TARGET_DB_CONFIG = {
 }
 
 
-def query_source(camera_id: str, roi_type: str = None, area_title: str = None, aircraft_model: str = None):
-    """查询源库 v_algorithm_param_post_roi 表"""
+def parse_json_field(value):
+    if not value:
+        return []
+    if isinstance(value, (list, dict)):
+        return value
+    try:
+        return json.loads(value)
+    except:
+        return []
+
+
+def normalize_data(data):
+    """标准化数据用于比对"""
+    if isinstance(data, list):
+        return sorted([tuple(item) if isinstance(item, list) else item for item in data])
+    return data
+
+
+def query_source_grid(camera_id: str):
+    """从源库查询 v_algorithm_param_grid"""
+    conn = psycopg2.connect(**SOURCE_DB_CONFIG)
+    cur = conn.cursor(cursor_factory=RealDictCursor)
+    cur.execute("""
+        SELECT index, point, gis
+        FROM v_algorithm_param_grid
+        WHERE camera_id = %s
+        LIMIT 1
+    """, (camera_id,))
+    row = cur.fetchone()
+    cur.close()
+    conn.close()
+    if row:
+        return {
+            "index": parse_json_field(row["index"]),
+            "point": parse_json_field(row["point"]),
+            "geopoint": parse_json_field(row["gis"])
+        }
+    return None
+
+
+def query_source_roi(camera_id: str, roi_type: str = None, area_title: str = None, aircraft_model: str = None):
+    """从源库查询 v_algorithm_param_post_roi"""
     conn = psycopg2.connect(**SOURCE_DB_CONFIG)
     cur = conn.cursor(cursor_factory=RealDictCursor)
 
@@ -36,6 +76,7 @@ def query_source(camera_id: str, roi_type: str = None, area_title: str = None, a
         SELECT type, roi, roi_of_detection, aircraft_model, area_title, name
         FROM v_algorithm_param_post_roi
         WHERE camera_id = %s
+          AND (type = 'post_safeguard' OR type = 'post_safety_scenarios')
     """
     params = [camera_id]
 
@@ -54,14 +95,31 @@ def query_source(camera_id: str, roi_type: str = None, area_title: str = None, a
     results = cur.fetchall()
     cur.close()
     conn.close()
-    return results
+
+    post_safeguard = []
+    safety_scenarios = []
+
+    for row in results:
+        item = {
+            "type": row["type"],
+            "roi": parse_json_field(row["roi"]),
+            "roi_of_detection": parse_json_field(row["roi_of_detection"]),
+            "aircraft_model": row["aircraft_model"],
+            "area_title": row["area_title"],
+            "name": row["name"]
+        }
+        if row["type"] == "post_safeguard":
+            post_safeguard.append(item)
+        else:
+            safety_scenarios.append(item)
+
+    return post_safeguard, safety_scenarios
 
 
-def query_target(camera_id: str, roi_type: str = None, area_title: str = None, aircraft_model: str = None):
-    """查询目标库 object_instances 表的 Camera 记录"""
+def query_target(camera_id: str):
+    """从目标库查询 Camera 的 properties"""
     conn = psycopg2.connect(**TARGET_DB_CONFIG)
     cur = conn.cursor(cursor_factory=RealDictCursor)
-
     cur.execute("""
         SELECT properties
         FROM object_instances
@@ -70,67 +128,152 @@ def query_target(camera_id: str, roi_type: str = None, area_title: str = None, a
           AND properties->>'cameraID' = %s
         LIMIT 1
     """, (camera_id,))
-
     row = cur.fetchone()
     cur.close()
     conn.close()
 
-    if not row:
-        return []
+    if row:
+        return row["properties"]
+    return None
 
-    properties = row["properties"]
 
-    # 从 postSafeguard 和 safetyScenarios 中提取
-    all_rois = []
+def compare_field(field_name: str, source_data, target_data):
+    """对比单个字段"""
+    source_norm = normalize_data(source_data) if source_data else None
+    target_norm = normalize_data(target_data) if target_data else None
 
-    for field in ["postSafeguard", "safetyScenarios"]:
-        items = properties.get(field, [])
-        if not isinstance(items, list):
-            continue
+    if source_norm == target_norm:
+        return True, None
+    else:
+        return False, {
+            "source_len": len(source_data) if source_data else 0,
+            "target_len": len(target_data) if target_data else 0
+        }
+
+
+def verify_grid(camera_id: str):
+    """校验 grid 数据 (index, point, geopoint)"""
+    print("\n========== Grid 数据校验 (index, point, geopoint) ==========")
+
+    source = query_source_grid(camera_id)
+    target = query_target(camera_id)
+
+    if not source:
+        print(f"  源库: 未找到 v_algorithm_param_grid 数据")
+        return
+
+    print(f"  源库: index={len(source['index'])}项, point={len(source['point'])}项, geopoint={len(source['geopoint'])}项")
+
+    if not target:
+        print(f"  目标库: 未找到 Camera {camera_id} 的 properties")
+        return
+
+    print(f"  目标库: index={len(target.get('index', []))}项, point={len(target.get('point', []))}项, geopoint={len(target.get('geopoint', []))}项")
+
+    # 对比 index
+    match, detail = compare_field("index", source["index"], target.get("index", []))
+    if match:
+        print(f"  index: 一致 ✓")
+    else:
+        print(f"  index: 差异 ✗ (源库{detail['source_len']}项, 目标库{detail['target_len']}项)")
+
+    # 对比 point
+    match, detail = compare_field("point", source["point"], target.get("point", []))
+    if match:
+        print(f"  point: 一致 ✓")
+    else:
+        print(f"  point: 差异 ✗ (源库{detail['source_len']}项, 目标库{detail['target_len']}项)")
+
+    # 对比 geopoint
+    match, detail = compare_field("geopoint", source["geopoint"], target.get("geopoint", []))
+    if match:
+        print(f"  geopoint: 一致 ✓")
+    else:
+        print(f"  geopoint: 差异 ✗ (源库{detail['source_len']}项, 目标库{detail['target_len']}项)")
+
+
+def verify_roi(camera_id: str, roi_type: str = None, area_title: str = None, aircraft_model: str = None):
+    """校验 roi 数据 (postSafeguard, safetyScenarios)"""
+    print("\n========== ROI 数据校验 (postSafeguard, safetyScenarios) ==========")
+
+    source_ps, source_ss = query_source_roi(camera_id, roi_type, area_title, aircraft_model)
+    target = query_target(camera_id)
+
+    print(f"  源库: postSafeguard={len(source_ps)}条, safetyScenarios={len(source_ss)}条")
+
+    if not target:
+        print(f"  目标库: 未找到 Camera {camera_id} 的 properties")
+        return
+
+    target_ps = target.get("postSafeguard", [])
+    target_ss = target.get("safetyScenarios", [])
+
+    print(f"  目标库: postSafeguard={len(target_ps)}条, safetyScenarios={len(target_ss)}条")
+
+    # 按 (type, area_title, aircraft_model) 分组对比
+    def group_by_key(items):
+        result = {}
         for item in items:
-            if roi_type and item.get("type") != roi_type:
-                continue
-            if area_title and item.get("area_title") != area_title:
-                continue
-            if aircraft_model and item.get("aircraft_model") != aircraft_model:
-                continue
-            all_rois.append({
-                "type": item.get("type"),
-                "roi": item.get("roi"),
-                "roi_of_detection": item.get("roi_of_detection"),
-                "aircraft_model": item.get("aircraft_model"),
-                "area_title": item.get("area_title"),
-                "name": item.get("name"),
-                "_source_field": field
-            })
+            key = (item.get("type"), item.get("area_title"), item.get("aircraft_model"))
+            result[key] = item
+        return result
 
-    return all_rois
+    source_ps_dict = group_by_key(source_ps)
+    target_ps_dict = group_by_key(target_ps)
 
+    source_ss_dict = group_by_key(source_ss)
+    target_ss_dict = group_by_key(target_ss)
 
-def normalize_roi(roi_data):
-    """标准化 roi 数据用于比对"""
-    if isinstance(roi_data, str):
-        try:
-            roi_data = json.loads(roi_data)
-        except:
-            pass
-    if not isinstance(roi_data, list):
-        return None
-    # 排序以保证顺序一致
-    return sorted([tuple(item) if isinstance(item, list) else item for item in roi_data])
+    # 对比 postSafeguard
+    print("\n  postSafeguard 对比:")
+    all_keys = set(source_ps_dict.keys()) | set(target_ps_dict.keys())
+    all_match = True
+    for key in sorted(all_keys, key=str):
+        src = source_ps_dict.get(key)
+        tgt = target_ps_dict.get(key)
+        if src is None:
+            print(f"    [差异] 源库无，目标库有: {key}")
+            all_match = False
+        elif tgt is None:
+            print(f"    [差异] 源库有，目标库无: {key}")
+            all_match = False
+        else:
+            src_roi = normalize_data(src.get("roi"))
+            tgt_roi = normalize_data(tgt.get("roi"))
+            if src_roi == tgt_roi:
+                print(f"    [一致] {key}: roi长度={len(src_roi)}")
+            else:
+                print(f"    [差异] {key}: 源库roi={len(src_roi)}项, 目标库roi={len(tgt_roi)}项")
+                all_match = False
+
+    # 对比 safetyScenarios
+    print("\n  safetyScenarios 对比:")
+    all_keys = set(source_ss_dict.keys()) | set(target_ss_dict.keys())
+    all_match_ss = True
+    for key in sorted(all_keys, key=str):
+        src = source_ss_dict.get(key)
+        tgt = target_ss_dict.get(key)
+        if src is None:
+            print(f"    [差异] 源库无，目标库有: {key}")
+            all_match_ss = False
+        elif tgt is None:
+            print(f"    [差异] 源库有，目标库无: {key}")
+            all_match_ss = False
+        else:
+            src_roi = normalize_data(src.get("roi"))
+            tgt_roi = normalize_data(tgt.get("roi"))
+            if src_roi == tgt_roi:
+                print(f"    [一致] {key}: roi长度={len(src_roi)}")
+            else:
+                print(f"    [差异] {key}: 源库roi={len(src_roi)}项, 目标库roi={len(tgt_roi)}项")
+                all_match_ss = False
+
+    return all_match and all_match_ss
 
 
 def main(camera_id: str = None, roi_type: str = None, area_title: str = None, aircraft_model: str = None):
-    """
-    camera_id: 必填，指定要校验的 Camera ID
-    roi_type: 可选，指定 type 维度进行校验（如 post_safeguard 或 post_safety_scenarios）
-    area_title: 可选，指定 area_title 维度进行校验
-    aircraft_model: 可选，指定 aircraft_model 维度进行校验
-
-    主函数，执行数据校验流程"""
-
     print("=" * 60)
-    print("ROI 数据校验")
+    print("ROI + Grid 数据校验")
     print("=" * 60)
     print(f"camera_id:      {camera_id}")
     if roi_type:
@@ -141,76 +284,16 @@ def main(camera_id: str = None, roi_type: str = None, area_title: str = None, ai
         print(f"aircraft_model: {aircraft_model}")
     print("=" * 60)
 
-    # 查询源库
-    source_data = query_source(camera_id, roi_type, area_title, aircraft_model)
-    print(f"\n源库 (v_algorithm_param_post_roi): 找到 {len(source_data)} 条记录")
+    # 校验 grid
+    verify_grid(camera_id)
 
-    # 查询目标库
-    target_data = query_target(camera_id, roi_type, area_title, aircraft_model)
-    print(f"目标库 (object_instances): 找到 {len(target_data)} 条记录")
-
-    if not source_data and not target_data:
-        print("\n双方均无数据")
-        return
-
-    if not source_data:
-        print("\n源库无数据，目标库有数据 - 数据不一致!")
-        return
-
-    if not target_data:
-        print("\n源库有数据，目标库无数据 - 数据不一致!")
-        return
-
-    # 逐条比对
-    print("\n" + "=" * 60)
-    print("比对结果")
-    print("=" * 60)
-
-    source_dict = {}
-    for item in source_data:
-        key = (item["type"], item["area_title"], item["aircraft_model"])
-        source_dict[key] = normalize_roi(item["roi"])
-
-    target_dict = {}
-    for item in target_data:
-        key = (item["type"], item["area_title"], item["aircraft_model"])
-        target_dict[key] = normalize_roi(item["roi"])
-
-    all_keys = set(source_dict.keys()) | set(target_dict.keys())
-    all_match = True
-
-    for key in sorted(all_keys, key=str):
-        src_roi = source_dict.get(key)
-        tgt_roi = target_dict.get(key)
-
-        if src_roi is None:
-            print(f"\n[差异] 源库无，目标库有: type={key[0]}, area_title={key[1]}, aircraft_model={key[2]}")
-            print(f"  目标 roi: {tgt_roi[:50] if tgt_roi else None}...")
-            all_match = False
-        elif tgt_roi is None:
-            print(f"\n[差异] 源库有，目标库无: type={key[0]}, area_title={key[1]}, aircraft_model={key[2]}")
-            print(f"  源 roi: {src_roi[:50] if src_roi else None}...")
-            all_match = False
-        elif src_roi == tgt_roi:
-            print(f"\n[一致] type={key[0]}, area_title={key[1]}, aircraft_model={key[2]}")
-            print(f"  roi 长度: {len(src_roi)}")
-        else:
-            print(f"\n[差异] type={key[0]}, area_title={key[1]}, aircraft_model={key[2]}")
-            print(f"  源库 roi 长度: {len(src_roi)}")
-            print(f"  目标库 roi 长度: {len(tgt_roi)}")
-            print(f"  源库 roi 前5项: {src_roi[:5]}")
-            print(f"  目标库 roi 前5项: {tgt_roi[:5]}")
-            all_match = False
+    # 校验 roi
+    verify_roi(camera_id, roi_type, area_title, aircraft_model)
 
     print("\n" + "=" * 60)
-    if all_match:
-        print("结果: 全部一致 ✓")
-    else:
-        print("结果: 存在差异 ✗")
+    print("校验完成")
     print("=" * 60)
 
 
 if __name__ == "__main__":
-    # camera_id、type、area_title、aircraft_model 可根据需要修改进行不同维度的校验
-
-    main(camera_id='55108135936', roi_type='post_safeguard', area_title='dinning_roi_three', aircraft_model='B737')
+    main(camera_id='55108135936', roi_type=None, area_title=None, aircraft_model=None)
